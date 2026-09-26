@@ -1,0 +1,635 @@
+{
+  "job_descriptions": [
+    {
+      "id": "jd-1",
+      "title": "Frontend Developer",
+      "must_have": [
+        "React",
+        "JavaScript (ES6+)",
+        "TypeScript",
+        "HTML5",
+        "CSS3",
+        "REST API integration",
+        "Redux or Context API",
+        "Responsive Design"
+      ],
+      "nice_to_have": [
+        "Next.js",
+        "TailwindCSS",
+        "GraphQL",
+        "Jest / React Testing Library",
+        "Vite",
+        "Storybook",
+        "Web Accessibility (a11y)"
+      ],
+      "experience_years": 2,
+      "education": "B.E / B.Tech / MCA in Computer Science or related field",
+      "location": "Mumbai",
+      "weights": { "resume": 0.6, "qa": 0.4 },
+      "pass_threshold": 70,
+      "confidence_cutoff": 0.6,
+      "summary": "Frontend Developer to build responsive, component-driven SPAs using React + TypeScript, integrate REST APIs, and deliver performant, accessible UIs."
+    },
+    {
+      "id": "jd-2",
+      "title": "Java Backend Developer",
+      "must_have": [
+        "Java 11+",
+        "Spring Boot",
+        "Spring MVC",
+        "RESTful Web Services",
+        "JPA / Hibernate",
+        "SQL (PostgreSQL / MySQL)",
+        "Maven or Gradle",
+        "JUnit"
+      ],
+      "nice_to_have": [
+        "Microservices Architecture",
+        "Kafka / RabbitMQ",
+        "Docker",
+        "Kubernetes",
+        "Spring Security / OAuth2",
+        "Redis",
+        "CI/CD (Jenkins / GitHub Actions)"
+      ],
+      "experience_years": 3,
+      "education": "B.E / B.Tech / MCA in Computer Science or related field",
+      "location": "Bengaluru",
+      "weights": { "resume": 0.6, "qa": 0.4 },
+      "pass_threshold": 72,
+      "confidence_cutoff": 0.6,
+      "summary": "Java Backend Developer to design and build scalable REST APIs and microservices using Spring Boot, backed by relational databases and message queues."
+    },
+    {
+      "id": "jd-3",
+      "title": "Python Developer",
+      "must_have": [
+        "Python 3.9+",
+        "FastAPI or Flask or Django",
+        "REST API design",
+        "SQL (PostgreSQL / MySQL)",
+        "SQLAlchemy or Django ORM",
+        "Unit Testing (pytest)",
+        "Git",
+        "Object Oriented Programming"
+      ],
+      "nice_to_have": [
+        "Async / Asyncio",
+        "Pandas / NumPy",
+        "Celery",
+        "Docker",
+        "AWS (Lambda / S3 / EC2)",
+        "Pydantic",
+        "CI/CD"
+      ],
+      "experience_years": 2,
+      "education": "B.E / B.Tech / MCA / B.Sc in Computer Science or related field",
+      "location": "Pune",
+      "weights": { "resume": 0.55, "qa": 0.45 },
+      "pass_threshold": 70,
+      "confidence_cutoff": 0.6,
+      "summary": "Python Developer to build backend services and data APIs using FastAPI/Django, integrate with SQL databases, and write clean, well-tested, production-ready code."
+    }
+  ],
+
+  "questions": [
+    {
+      "id": "q-fe-01",
+      "jd_id": "jd-1",
+      "text": "Explain how you would optimise rendering of a large list (10,000+ rows) in a React application.",
+      "reference_answer": "Use windowing / virtualization (react-window or react-virtualized) so only visible rows are mounted. Provide stable, unique key props. Memoize row components with React.memo. Avoid inline objects / functions in props to prevent re-renders. Debounce scroll handlers. If data comes from an API, paginate or use infinite scroll.",
+      "rubric": {
+        "score_5": [
+          "mentions virtualization / windowing (react-window / react-virtualized)",
+          "explains stable keys and React.memo / useMemo / useCallback",
+          "mentions pagination or infinite scroll for API data",
+          "provides at least one code-level detail or example"
+        ],
+        "score_3": [
+          "mentions keys and memoization only",
+          "mentions pagination but not virtualization",
+          "vague understanding of re-render cost"
+        ],
+        "score_0": [
+          "no relevant concept",
+          "suggests only CSS fixes or loops"
+        ]
+      }
+    },
+    {
+      "id": "q-fe-02",
+      "jd_id": "jd-1",
+      "text": "What is the Virtual DOM and how does React use it to update the UI efficiently?",
+      "reference_answer": "The Virtual DOM is an in-memory representation of the real DOM. On state/props change, React builds a new VDOM tree, diffs it against the previous one (reconciliation), and computes a minimal set of real-DOM mutations to apply. This batching + diffing is faster than direct DOM manipulation for most UI updates.",
+      "rubric": {
+        "score_5": [
+          "defines Virtual DOM as in-memory tree",
+          "explains diffing / reconciliation",
+          "mentions minimal real-DOM updates / batching",
+          "correctly contrasts with direct DOM manipulation"
+        ],
+        "score_3": [
+          "defines Virtual DOM but no diffing detail",
+          "confuses Virtual DOM with Shadow DOM"
+        ],
+        "score_0": [
+          "no correct concept",
+          "claims Virtual DOM is a browser feature"
+        ]
+      }
+    },
+    {
+      "id": "q-fe-03",
+      "jd_id": "jd-1",
+      "text": "Compare useState, useReducer, and Redux. When would you choose each?",
+      "reference_answer": "useState: simple local component state. useReducer: complex local state with multiple sub-values or transitions best expressed as actions. Redux (or Redux Toolkit): app-wide shared state across many components, with middleware, devtools, and predictable global state. Prefer Context + useReducer for medium apps; Redux for large apps with cross-cutting state.",
+      "rubric": {
+        "score_5": [
+          "clearly separates local vs global state",
+          "mentions action/reducer pattern for useReducer",
+          "gives a concrete criterion for choosing Redux (scale, middleware, devtools)",
+          "mentions Context API or Redux Toolkit"
+        ],
+        "score_3": [
+          "explains only 2 of the 3",
+          "confuses useReducer with Redux"
+        ],
+        "score_0": [
+          "cannot differentiate them",
+          "no relevant concept"
+        ]
+      }
+    },
+    {
+      "id": "q-fe-04",
+      "jd_id": "jd-1",
+      "text": "How do you handle authentication tokens (JWT) securely on the frontend?",
+      "reference_answer": "Prefer HttpOnly, Secure, SameSite cookies so JS cannot read the token (mitigates XSS). If storing in memory, keep tokens out of localStorage (XSS-exposed). Attach tokens via Authorization header on each API call using an interceptor. Refresh tokens via a short-lived access token + refresh token flow. Always use HTTPS.",
+      "rubric": {
+        "score_5": [
+          "warns against localStorage due to XSS",
+          "recommends HttpOnly + Secure cookies OR in-memory storage",
+          "mentions refresh token flow",
+          "mentions axios/fetch interceptor or Authorization header"
+        ],
+        "score_3": [
+          "mentions Authorization header only",
+          "acknowledges XSS but no mitigation"
+        ],
+        "score_0": [
+          "recommends storing tokens in localStorage without caveat",
+          "no security awareness"
+        ]
+      }
+    },
+    {
+      "id": "q-fe-05",
+      "jd_id": "jd-1",
+      "text": "Explain the CSS Box Model and the difference between content-box and border-box.",
+      "reference_answer": "The box model is content + padding + border + margin. With content-box (default), width/height apply only to content and padding/border add to total size. With border-box, width/height include padding and border, so total size stays predictable. Most modern resets set box-sizing: border-box globally.",
+      "rubric": {
+        "score_5": [
+          "correctly lists content, padding, border, margin",
+          "explains content-box vs border-box width calculation",
+          "mentions box-sizing reset best practice"
+        ],
+        "score_3": [
+          "explains box model but not the two sizing modes",
+          "partial explanation of border-box"
+        ],
+        "score_0": [
+          "incorrect box model",
+          "no relevant concept"
+        ]
+      }
+    },
+    {
+      "id": "q-fe-06",
+      "jd_id": "jd-1",
+      "text": "What are React hooks rules, and what happens if you call a hook conditionally?",
+      "reference_answer": "Rules: (1) only call hooks at the top level, never inside loops/conditions/nested functions, and (2) only call from React function components or custom hooks. React relies on the call order to associate state with the correct hook slot. Calling conditionally shifts the order, corrupts state mapping, and typically triggers a lint / runtime error.",
+      "rubric": {
+        "score_5": [
+          "states both rules explicitly",
+          "explains React tracks hooks by call order",
+          "explains consequence of order mismatch",
+          "mentions eslint-plugin-react-hooks"
+        ],
+        "score_3": [
+          "states rules but not the reason",
+          "vague about the failure mode"
+        ],
+        "score_0": [
+          "no awareness of hook rules",
+          "claims hooks can be called anywhere"
+        ]
+      }
+    },
+
+    {
+      "id": "q-jb-01",
+      "jd_id": "jd-2",
+      "text": "Explain Dependency Injection in Spring. What is the difference between constructor, setter, and field injection, and which is preferred?",
+      "reference_answer": "DI lets Spring supply collaborators to a bean rather than the bean creating them. Constructor injection: dependencies passed via constructor; enables final fields, easy unit testing, and fails fast if a bean is missing. Setter injection: via setters, useful for optional dependencies. Field injection (@Autowired on a field): concise but hides dependencies, complicates testing, and is discouraged. Constructor injection is preferred.",
+      "rubric": {
+        "score_5": [
+          "defines DI and IoC container role",
+          "distinguishes constructor / setter / field",
+          "recommends constructor injection with reasoning (final, testability)",
+          "mentions drawbacks of field injection"
+        ],
+        "score_3": [
+          "names the three types but no reasoning",
+          "recommends constructor injection without explanation"
+        ],
+        "score_0": [
+          "cannot define DI",
+          "confuses DI with singleton pattern"
+        ]
+      }
+    },
+    {
+      "id": "q-jb-02",
+      "jd_id": "jd-2",
+      "text": "What is the difference between @Controller and @RestController in Spring, and how does @RequestMapping / @GetMapping work?",
+      "reference_answer": "@Controller returns view names resolved by a ViewResolver (e.g., Thymeleaf). @RestController is @Controller + @ResponseBody, so return values are serialized directly (JSON) into the HTTP body. @RequestMapping maps URLs to handler methods; @GetMapping, @PostMapping etc. are shortcuts for specific HTTP verbs.",
+      "rubric": {
+        "score_5": [
+          "correctly defines @RestController = @Controller + @ResponseBody",
+          "mentions view resolution vs JSON serialization",
+          "explains @RequestMapping and HTTP-verb shortcuts",
+          "uses correct terminology"
+        ],
+        "score_3": [
+          "identifies REST vs MVC but no mention of @ResponseBody",
+          "explains only one annotation"
+        ],
+        "score_0": [
+          "cannot differentiate",
+          "no relevant concept"
+        ]
+      }
+    },
+    {
+      "id": "q-jb-03",
+      "jd_id": "jd-2",
+      "text": "Explain JPA / Hibernate entity lifecycle states (Transient, Persistent, Detached, Removed) and the role of the EntityManager / Session.",
+      "reference_answer": "Transient: new object, not associated with a persistence context. Persistent: managed by the current EntityManager/Session; changes are auto-synced on flush. Detached: was persistent but the context closed; changes are not tracked until re-attached via merge(). Removed: scheduled for deletion on flush. EntityManager (JPA) / Session (Hibernate) is the persistence context that tracks entities and coordinates flush/commit.",
+      "rubric": {
+        "score_5": [
+          "names all four states correctly",
+          "explains what triggers transitions (persist, merge, remove, close)",
+          "defines role of EntityManager / persistence context",
+          "mentions dirty checking / auto-flush"
+        ],
+        "score_3": [
+          "names 2–3 states",
+          "vague on transitions"
+        ],
+        "score_0": [
+          "cannot name any lifecycle state",
+          "confuses JPA with JDBC"
+        ]
+      }
+    },
+    {
+      "id": "q-jb-04",
+      "jd_id": "jd-2",
+      "text": "How would you design a REST API endpoint that handles concurrent updates to the same resource without lost updates?",
+      "reference_answer": "Use optimistic locking with a @Version column: each update compares the version; a mismatch throws OptimisticLockException and the client retries. Alternatively use pessimistic locking (SELECT ... FOR UPDATE) for high-contention rows. Return HTTP 409 Conflict on version mismatch. Use idempotency keys for POST/PUT retries. ETags + If-Match headers are the HTTP-native way to do the same.",
+      "rubric": {
+        "score_5": [
+          "mentions optimistic locking with @Version",
+          "explains pessimistic locking trade-off",
+          "returns 409 Conflict or uses ETag / If-Match",
+          "mentions idempotency for retries"
+        ],
+        "score_3": [
+          "mentions locking generically without version/ETag",
+          "no HTTP status guidance"
+        ],
+        "score_0": [
+          "suggests only synchronized keyword",
+          "no awareness of concurrency issue"
+        ]
+      }
+    },
+    {
+      "id": "q-jb-05",
+      "jd_id": "jd-2",
+      "text": "What is the difference between checked and unchecked exceptions in Java, and how would you handle exceptions in a Spring Boot REST controller?",
+      "reference_answer": "Checked exceptions (extend Exception, not RuntimeException) must be declared or caught; used for recoverable conditions. Unchecked (RuntimeException) are for programming errors. In Spring Boot, centralize handling with @RestControllerAdvice + @ExceptionHandler methods that map exceptions to a consistent JSON error body and appropriate HTTP status. Avoid catching and swallowing; log with correlation IDs.",
+      "rubric": {
+        "score_5": [
+          "correctly defines checked vs unchecked",
+          "recommends @RestControllerAdvice / @ExceptionHandler",
+          "maps exceptions to HTTP status codes",
+          "mentions consistent error response body"
+        ],
+        "score_3": [
+          "distinguishes checked/unchecked only",
+          "mentions try/catch but no global handler"
+        ],
+        "score_0": [
+          "swaps definitions",
+          "recommends catching Throwable everywhere"
+        ]
+      }
+    },
+    {
+      "id": "q-jb-06",
+      "jd_id": "jd-2",
+      "text": "Explain how you would secure a Spring Boot REST API with JWT-based authentication.",
+      "reference_answer": "Add Spring Security. Configure a stateless SecurityFilterChain (session policy STATELESS). On /login, validate credentials and issue a signed JWT (HS256/RS256) with claims (sub, roles, exp). Add a JwtAuthenticationFilter before UsernamePasswordAuthenticationFilter that extracts the Bearer token, verifies signature and expiry, and sets Authentication in SecurityContext. Use @PreAuthorize for method-level authorization. Keep secrets in env vars; use short-lived access + refresh tokens.",
+      "rubric": {
+        "score_5": [
+          "configures stateless SecurityFilterChain",
+          "describes a custom JWT filter and SecurityContext",
+          "mentions signature, expiry, and claims",
+          "mentions refresh token flow or method-level security"
+        ],
+        "score_3": [
+          "mentions JWT and Spring Security but no filter chain detail",
+          "no mention of stateless session"
+        ],
+        "score_0": [
+          "confuses JWT with session cookies",
+          "stores secrets in code"
+        ]
+      }
+    },
+
+    {
+      "id": "q-py-01",
+      "jd_id": "jd-3",
+      "text": "Explain the difference between a list, tuple, set, and dict in Python. When would you use each?",
+      "reference_answer": "list: ordered, mutable, allows duplicates — for sequences that change. tuple: ordered, immutable — for fixed records or dict keys. set: unordered, unique elements — for membership tests and dedup. dict: key-value map, keys hashable and unique — for lookups by key. Choose by mutability, order, and lookup pattern.",
+      "rubric": {
+        "score_5": [
+          "correctly compares mutability, ordering, uniqueness",
+          "gives concrete use cases for each",
+          "mentions O(1) lookup for set/dict",
+          "notes tuple as valid dict key"
+        ],
+        "score_3": [
+          "differentiates 2–3 but misses one property",
+          "no use cases"
+        ],
+        "score_0": [
+          "confuses list and tuple mutability",
+          "no correct concept"
+        ]
+      }
+    },
+    {
+      "id": "q-py-02",
+      "jd_id": "jd-3",
+      "text": "What is the Global Interpreter Lock (GIL) in CPython? How does it affect multithreading and multiprocessing?",
+      "reference_answer": "The GIL is a mutex in CPython that allows only one thread to execute Python bytecode at a time. CPU-bound multithreading gets no true parallelism — use multiprocessing (separate interpreters/processes) or C-extensions that release the GIL. I/O-bound work still benefits from threads because the GIL is released during blocking I/O. asyncio is a single-thread cooperative alternative for I/O-bound concurrency.",
+      "rubric": {
+        "score_5": [
+          "correctly defines the GIL and CPython-specific nature",
+          "explains impact on CPU-bound vs I/O-bound work",
+          "recommends multiprocessing for CPU-bound",
+          "mentions asyncio or C-extensions"
+        ],
+        "score_3": [
+          "defines GIL but not CPU vs I/O impact",
+          "no mitigation strategy"
+        ],
+        "score_0": [
+          "claims Python has no GIL",
+          "confuses GIL with thread safety"
+        ]
+      }
+    },
+    {
+      "id": "q-py-03",
+      "jd_id": "jd-3",
+      "text": "How do decorators work in Python? Write a decorator that logs the execution time of a function.",
+      "reference_answer": "A decorator is a callable that takes a function and returns a new function, usually wrapping the original to add behavior. Use functools.wraps to preserve metadata. Example: def timer(fn):\\n  @wraps(fn)\\n  def wrapper(*args, **kwargs):\\n    start = time.perf_counter()\\n    result = fn(*args, **kwargs)\\n    print(f'{fn.__name__} took {time.perf_counter()-start:.3f}s')\\n    return result\\n  return wrapper",
+      "rubric": {
+        "score_5": [
+          "explains decorator = higher-order function",
+          "provides a correct working code snippet",
+          "uses functools.wraps",
+          "uses *args, **kwargs to preserve signature"
+        ],
+        "score_3": [
+          "explains concept but code has minor bugs",
+          "no functools.wraps"
+        ],
+        "score_0": [
+          "cannot define decorator",
+          "code does not call the wrapped function"
+        ]
+      }
+    },
+    {
+      "id": "q-py-04",
+      "jd_id": "jd-3",
+      "text": "Compare FastAPI, Flask, and Django. Which would you choose for a modern async REST API and why?",
+      "reference_answer": "Flask: minimal WSGI microframework; flexible but you assemble everything. Django: batteries-included (ORM, admin, auth) — great for CRUD-heavy apps but heavier. FastAPI: modern ASGI, native async/await, Pydantic-based validation, auto OpenAPI docs, type-hint driven. For a modern async REST API, FastAPI is the best fit due to performance, async support, and automatic docs.",
+      "rubric": {
+        "score_5": [
+          "correctly contrasts WSGI vs ASGI",
+          "highlights FastAPI async + Pydantic + OpenAPI",
+          "mentions Django batteries-included trade-off",
+          "gives a clear justified choice"
+        ],
+        "score_3": [
+          "compares two frameworks only",
+          "no mention of async/ASGI"
+        ],
+        "score_0": [
+          "cannot differentiate them",
+          "incorrect claims about frameworks"
+        ]
+      }
+    },
+    {
+      "id": "q-py-05",
+      "jd_id": "jd-3",
+      "text": "Explain generators and the difference between yield and return. When are generators preferable to lists?",
+      "reference_answer": "A generator function uses yield; calling it returns a generator object that produces values lazily on each next() call, retaining local state between yields. return in a normal function returns a single value and ends execution. Generators are preferable when the data is large or infinite, streamed, or produced on demand — memory usage stays O(1) instead of O(n).",
+      "rubric": {
+        "score_5": [
+          "explains lazy evaluation and state retention",
+          "contrasts yield vs return",
+          "identifies memory / streaming benefit",
+          "mentions generator expressions or itertools"
+        ],
+        "score_3": [
+          "defines yield but not the lazy/state aspect",
+          "no memory reasoning"
+        ],
+        "score_0": [
+          "claims yield is the same as return",
+          "no relevant concept"
+        ]
+      }
+    },
+    {
+      "id": "q-py-06",
+      "jd_id": "jd-3",
+      "text": "How would you handle database transactions and connection pooling in a FastAPI + SQLAlchemy application?",
+      "reference_answer": "Configure a SQLAlchemy Engine with a connection pool (pool_size, max_overflow, pool_pre_ping). Use a scoped SessionLocal factory. Provide a FastAPI dependency that yields a session and closes it in a finally block (or uses async context). Wrap unit-of-work operations in session.begin() so commit/rollback are automatic on exception. For async, use AsyncEngine + AsyncSession. Never share a session across requests.",
+      "rubric": {
+        "score_5": [
+          "mentions Engine + pool settings",
+          "uses FastAPI dependency to scope session per request",
+          "explains commit/rollback pattern",
+          "mentions async engine or pool_pre_ping"
+        ],
+        "score_3": [
+          "creates session per request but no pool config",
+          "manual commit only, no rollback path"
+        ],
+        "score_0": [
+          "creates a global session shared across requests",
+          "no transaction awareness"
+        ]
+      }
+    }
+  ],
+
+  "candidates": [
+    {
+      "id": "cand-1",
+      "user": "candidate1",
+      "name": "candidate1",
+      "email": "candidate1@example.com",
+      "applied_jd": "jd-1",
+      "experience_years": 3,
+      "education": "B.Tech in Computer Science, VIT Vellore, 2022",
+      "location": "Mumbai",
+      "profile_type": "strong_fit",
+      "resume": "candidate1 — Frontend Developer, 3 years experience. Built and maintained large React + TypeScript SPAs at a fintech product startup. Strong hands-on with React hooks, Redux Toolkit, Context API, and React Router. Extensive REST API integration using Axios with interceptors and JWT auth. Solid HTML5 / CSS3 skills, TailwindCSS for styling, and responsive design across mobile and desktop breakpoints. Wrote unit and integration tests with Jest and React Testing Library, targeting 80%+ coverage on critical components. Migrated a CRA project to Vite, cutting cold-start build times by 60%. Familiar with Next.js SSR and web accessibility (WCAG AA). Comfortable with Git, GitHub Actions CI, and Docker for local dev."
+    },
+    {
+      "id": "cand-2",
+      "user": "candidate2",
+      "name": "candidate2",
+      "email": "candidate2@example.com",
+      "applied_jd": "jd-1",
+      "experience_years": 2,
+      "education": "MCA, Pune University, 2023",
+      "location": "Mumbai",
+      "profile_type": "missing_musthave_typescript",
+      "resume": "candidate2 — Frontend Developer, 2 years. Worked on customer-facing React web apps in plain JavaScript (ES6+). Comfortable with functional components, hooks, and Context API for state management. Consumed REST APIs using fetch and Axios. Built responsive layouts with CSS3, Flexbox, and Grid. Some exposure to jQuery on legacy pages. Basic Git workflow (feature branches, PRs). Has not worked on TypeScript projects yet but has been self-learning. No professional testing experience beyond manual QA."
+    },
+    {
+      "id": "cand-3",
+      "user": "candidate3",
+      "name": "candidate3",
+      "email": "candidate3@example.com",
+      "applied_jd": "jd-1",
+      "experience_years": 5,
+      "education": "B.E. Information Technology, Mumbai University, 2020",
+      "location": "Mumbai",
+      "profile_type": "senior_strong",
+      "resume": "candidate3 — Senior Frontend Engineer, 5 years experience. Led frontend for a B2B SaaS dashboard used by 200+ enterprise customers. Deep expertise in React 18, TypeScript, Redux Toolkit + RTK Query, and Next.js (App Router, SSR/ISR). Architected a design-system library documented in Storybook and shared across 4 product teams. Introduced GraphQL (Apollo Client) alongside REST for data-heavy pages. Strong on responsive design, TailwindCSS, and web accessibility (WCAG AA / a11y audits). Championed Jest + React Testing Library and Playwright E2E — CI blocks on <75% coverage. Migrated multiple apps from Webpack to Vite. Mentors 3 juniors."
+    },
+    {
+      "id": "cand-4",
+      "user": "candidate4",
+      "name": "candidate4",
+      "email": "candidate4@example.com",
+      "applied_jd": "jd-1",
+      "experience_years": 1,
+      "education": "B.Tech in Computer Science, Chandigarh University, 2024",
+      "location": "Mumbai",
+      "profile_type": "junior_borderline",
+      "resume": "candidate4 — Junior Frontend Developer, 1 year experience. Fresh graduate working on a React + TypeScript internal admin tool. Comfortable with functional components, useState, useEffect, and basic React Router. Learning Redux; currently uses Context API. Some REST API integration with fetch. HTML/CSS solid, still building Flexbox/Grid intuition. Wrote a few simple Jest tests. No production deployment ownership yet. Eager learner, actively doing a Next.js side project."
+    },
+    {
+      "id": "cand-5",
+      "user": "candidate5",
+      "name": "candidate5",
+      "email": "candidate5@example.com",
+      "applied_jd": "jd-2",
+      "experience_years": 4,
+      "education": "B.Tech in Computer Science, NIT Warangal, 2021",
+      "location": "Bengaluru",
+      "profile_type": "strong_fit",
+      "resume": "candidate5 — Java Backend Developer, 4 years experience. Built and maintained microservices for a payments platform handling 5M+ transactions/day. Deep hands-on with Java 11/17, Spring Boot, Spring MVC, Spring Data JPA, and Hibernate against PostgreSQL. Designed RESTful APIs following OpenAPI spec; strong on request validation, exception handling with @RestControllerAdvice, and idempotency for retries. Extensive use of Kafka for event-driven flows and Redis for caching. Wrote JUnit 5 + Mockito unit tests and Testcontainers integration tests. Comfortable with Docker, Kubernetes (deployed to GKE), and Jenkins CI/CD. Familiar with Spring Security + OAuth2 / JWT."
+    },
+    {
+      "id": "cand-6",
+      "user": "candidate6",
+      "name": "candidate6",
+      "email": "candidate6@example.com",
+      "applied_jd": "jd-2",
+      "experience_years": 6,
+      "education": "M.Sc Computer Science, Anna University, 2019",
+      "location": "Bengaluru",
+      "profile_type": "missing_musthave_springboot",
+      "resume": "candidate6 — Java Developer, 6 years experience in enterprise Java. Worked on large monolithic banking applications using Java 8, Servlets, JSP, and Struts 2 framework. Extensive JDBC and stored-procedure work against Oracle DB. Strong on core Java, multithreading, and collections. Some exposure to Spring Core (dependency injection, XML configuration) but no Spring Boot production experience. Familiar with Maven and SVN. Wrote JUnit 4 tests for service classes. Interested in transitioning to Spring Boot / microservices."
+    },
+    {
+      "id": "cand-7",
+      "user": "candidate7",
+      "name": "candidate7",
+      "email": "candidate7@example.com",
+      "applied_jd": "jd-2",
+      "experience_years": 1,
+      "education": "B.E. Computer Engineering, Gujarat Technological University, 2024",
+      "location": "Bengaluru",
+      "profile_type": "contradictory_overclaim",
+      "resume": "candidate7 — Java Backend Developer, 1 year experience. Skills: Java, Spring Boot, Spring Cloud, Microservices, Kafka, RabbitMQ, Kubernetes, Istio service mesh, gRPC, Docker Swarm, AWS EKS, Terraform, Cassandra, MongoDB, Elasticsearch, GraphQL, Redis, CI/CD with ArgoCD, Prometheus + Grafana observability. Built a college project deployed on Kubernetes. Familiar with Spring Security and OAuth2. Certifications: none yet. Looking for senior backend roles."
+    },
+    {
+      "id": "cand-8",
+      "user": "candidate8",
+      "name": "candidate8",
+      "email": "candidate8@example.com",
+      "applied_jd": "jd-3",
+      "experience_years": 3,
+      "education": "B.Tech in Computer Science, Jadavpur University, 2022",
+      "location": "Pune",
+      "profile_type": "strong_fit",
+      "resume": "candidate8 — Python Backend Developer, 3 years experience. Built REST APIs using FastAPI and Pydantic v2 for an e-commerce order service; used async SQLAlchemy 2.0 against PostgreSQL with Alembic migrations. Strong on OOP, type hints, dependency injection via FastAPI, and clean layered architecture. Wrote pytest suites (unit + integration with Testcontainers) with 85% coverage. Comfortable with async / asyncio, Celery + Redis for background jobs, and Docker + docker-compose for local dev. Deployed services on AWS (Lambda, ECS Fargate, S3). Uses GitHub Actions for CI/CD. Some Django REST Framework exposure from a prior project."
+    },
+    {
+      "id": "cand-9",
+      "user": "candidate9",
+      "name": "candidate9",
+      "email": "candidate9@example.com",
+      "applied_jd": "jd-3",
+      "experience_years": 4,
+      "education": "MCA, Cochin University, 2021",
+      "location": "Pune",
+      "profile_type": "framework_mismatch",
+      "resume": "candidate9 — Django Developer, 4 years experience. Built and maintained a Django + Django REST Framework monolith for an ed-tech platform with 50k daily active users. Strong on Django ORM, class-based views, DRF serializers, and authentication (JWT via SimpleJWT). Worked with PostgreSQL and used Django's built-in migrations. Some Celery + Redis for async tasks. Wrote pytest-django tests. Docker for deployment. Limited exposure to FastAPI or Flask. Comfortable with core Python, OOP, and Git. Interested in moving to async Python and FastAPI."
+    },
+    {
+      "id": "cand-10",
+      "user": "candidate10",
+      "name": "candidate10",
+      "email": "candidate10@example.com",
+      "applied_jd": "jd-3",
+      "experience_years": 2,
+      "education": "M.Sc in Data Science, IIT Madras, 2023",
+      "location": "Pune",
+      "profile_type": "low_confidence_datascience",
+      "resume": "candidate10 — Data Scientist / Python user, 2 years experience. Strong Python for data analysis using Pandas, NumPy, and scikit-learn. Built ML models (XGBoost, logistic regression) and deployed a few as Flask endpoints on a single EC2 instance. Basic SQL against PostgreSQL for feature extraction. Some exposure to FastAPI in a hackathon project. Limited experience with production-grade REST API design, SQLAlchemy ORM, or async Python. No formal unit testing background beyond notebook validation. Comfortable with Git and Jupyter."
+    }
+  ],
+
+  "users": [
+    { "username": "admin1",       "role": "admin",       "password": "admin123" },
+    { "username": "admin2",       "role": "admin",       "password": "admin123" },
+    { "username": "candidate1",   "role": "candidate",   "password": "cand123"  },
+    { "username": "candidate2",   "role": "candidate",   "password": "cand123"  },
+    { "username": "candidate3",   "role": "candidate",   "password": "cand123"  },
+    { "username": "candidate4",   "role": "candidate",   "password": "cand123"  },
+    { "username": "candidate5",   "role": "candidate",   "password": "cand123"  },
+    { "username": "candidate6",   "role": "candidate",   "password": "cand123"  },
+    { "username": "candidate7",   "role": "candidate",   "password": "cand123"  },
+    { "username": "candidate8",   "role": "candidate",   "password": "cand123"  },
+    { "username": "candidate9",   "role": "candidate",   "password": "cand123"  },
+    { "username": "candidate10",  "role": "candidate",   "password": "cand123"  },
+    { "username": "interviewer1", "role": "interviewer", "password": "int123"   },
+    { "username": "interviewer2", "role": "interviewer", "password": "int123"   }
+  ]
+}

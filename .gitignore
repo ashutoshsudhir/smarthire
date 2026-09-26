@@ -1,0 +1,22 @@
+# secrets
+.env
+.env.*
+!.env.example
+!frontend/.env.development
+
+# python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.db
+
+# node
+node_modules/
+dist/
+
+# vercel
+.vercel/
+
+# os
+.DS_Store
